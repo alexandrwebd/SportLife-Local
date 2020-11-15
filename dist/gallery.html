@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald:300,700&display=swap&subset=cyrillic"
+        rel="stylesheet">
+    <!-- <link rel="stylesheet" href="magnific-popup/magnific-popup.css"> -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="header__top-inner">
+                    <div class="logo">
+                        <a class="logo__link" href="/">
+                            <img class="logo__img" src="images/logo.png" alt="SportLife">
+                        </a>
+                    </div>
+                    <nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="about-us.html">О клубе</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="service.html">Услуги</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="prices.html">Цены</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="team.html">Команда</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="gallery.html">Галерея</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="blog.html">Блог</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a class="menu__link" href="contacts.html">Контакты</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="header__phone">
+                        <a class="header__phone-link" href="tel:80935433112">8 093 543 31 12</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-title">
+        <div class="container">
+            <h3 class="section__gallery-title title wow fadeInLeft" data-wow-duration="1.5s">Наша галерея</h3>
+        </div>
+    </section>
+
+    <template id="pagination-template">
+        <div class="pagination">
+            <div class="pagination__left" id="galery-pagination__left">
+                <a href="#" v-if="hasPrev()" @click.prevent="changePage(prevPage)">Предыдущая</a>
+            </div>
+            <div class="pagination__mid"> {{ current }} <span>/</span> {{ totalPages }} </div>
+            <div class="pagination__right">
+                <a href="#" v-if="hasNext()" @click.prevent="changePage(nextPage)">Следующая</a>
+            </div>
+        </div>
+    </template>
+
+    <section class="gallery" id="app">
+        <div class="gallery__inner gallery-popup">
+            <div class="gallery__item" v-for="photo in photos">
+                <a :href="photo.urls.small" class="gallery-link">
+                    <img class="gallery__item-img  gallery__img-popup" :src="photo.urls.small" alt="gallery">
+                     <span class="gallery__item--overlay"></span>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <pagination :current="currentPage" @page-changed="fetchPhotos" :total="totalPhotos" :per-page="perPage">
+            </pagination>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__wrapper">
+                <div class="footer__info">
+                    <div class="footer__info-logo">
+                        <a class="logo__link" href="#">
+                            <img class="logo__img" src="images/footer-logo.png" alt="SportLife">
+                        </a>
+                    </div>
+                    <p class="footer__info-text">
+                        Фитнес клуб премиум класса, расположен
+                        в самом центре Чернигова по адресу
+                        ул. Пятницкая 72, за ТРЦ “Мегацентр”,
+                        общая площадь 2500 м2.
+                    </p>
+                    <div class="footer__info-social">
+                        Мы в соцсетях:
+                        <a href="#" class="footer__social-facebook footer-social"></a>
+                        <a href="#" class="footer__social-instagram footer-social"></a>
+                        <a href="#" class="footer__social-telegram footer-social"></a>
+                        <a href="#" class="footer__social-viber footer-social"></a>
+                    </div>
+                    <form action="" class="footer__info-form">
+                        <label for="footer-form" class="footer__form-label">Подпишитесь на разсылку</label>
+                        <div class="footer__form-group">
+                            <input type="email" class="footer-form" id="footer-form" placeholder="Введите Email...">
+                            <button type="submit" class="footer-btn">Подписаться</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer__blog">
+                    <h5 class="footer__blog-title">Блоги</h5>
+                    <div class="footer__blog-inner">
+                        <div class="footer__blog-item">
+                            <a href="#" class="footer__blog-img">
+                                <img src="images/footer__blog-1.jpg" alt="footer blog">
+                            </a>
+                            <p class="footer__blog-text">
+                                Делимся рецептами правильного
+                                питания. Раскажем как правильно
+                                сочетать продукты.
+                            </p>
+                        </div>
+                        <div class="footer__blog-item">
+                            <a href="#" class="footer__blog-img">
+                                <img src="images/footer__blog-2.jpg" alt="footer blog">
+                            </a>
+                            <p class="footer__blog-text">
+                                Наши тренера раскажут как
+                                получить максимум удовольствия
+                                от тренировок.
+                            </p>
+                        </div>
+                        <div class="footer__blog-item">
+                            <a href="#" class="footer__blog-img">
+                                <img src="images/footer__blog-3.jpg" alt="footer blog">
+                            </a>
+                            <p class="footer__blog-text">
+                                Раскажем с чего начать если
+                                вы не можете найти ответ
+                                на этот вопрос.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__instagram">
+                    <h5 class="footer__instagram-title">Instagram</h5>
+                    <div class="footer__instagram-inner">
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-1.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-2.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-3.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-4.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-5.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-6.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-7.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-8.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-9.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-10.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-11.jpg" alt="footer instagram">
+                        </a>
+                        <a href="#" class="footer__instagram-item">
+                            <img src="images/footer__instagram-12.jpg" alt="footer instagram">
+                        </a>
+                    </div>
+                    <a href="gallery.html" class="footer__instagram-subtitle">Много красивых фотографий</a>
+                </div>
+            </div>
+            <p class="footer-copyright">&copy; Фитнес-клуб "SportLife", 2020</p>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="js/app.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/libs.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
